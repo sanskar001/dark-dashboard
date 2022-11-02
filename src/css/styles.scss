@@ -1,0 +1,567 @@
+@import "reset";
+
+// COMMON VARIABLES
+$primary-color: #fff;
+$secondary-color: #777e90;
+$box-color: #23262f;
+
+// Vertically center with gap
+@mixin verticalCenter($myGap: 10px, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  gap: $myGap;
+}
+
+// ===================== MENU BAR STYLING ===========================
+
+.app {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+// ================ SIDE MENU BAR ================
+
+.menu-bar {
+  padding: 30px 15px;
+  @media screen and (max-width: 600px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 100;
+    box-shadow: -10px 48.5967px 140px rgba(126, 123, 160, 0.2);
+    backdrop-filter: blur(9.5px);
+    background-color: #23262f80;
+    border-radius: 0px 20px 20px 0px;
+    transform: scaleX(0);
+    transform-origin: left top;
+    transition: all 0.15s ease;
+  }
+  @media screen and (min-width: 600px) {
+    transform: scaleX(1) !important;
+  }
+
+  img {
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  h3 {
+    display: none;
+    font: {
+      size: 32px;
+      weight: 500;
+    }
+    margin-bottom: 40px;
+    color: $primary-color;
+
+    @media screen and (max-width: 600px) {
+      display: block;
+    }
+  }
+
+  ul {
+    @include verticalCenter(60px, column);
+    width: 100%;
+    list-style: none;
+
+    @media screen and (max-width: 600px) {
+      align-items: flex-start;
+    }
+
+    li {
+      @include verticalCenter(5px);
+      cursor: pointer;
+
+      svg {
+        path {
+          stroke: $secondary-color;
+          transition: stroke 0.3s ease;
+        }
+      }
+
+      span {
+        display: none;
+        @media screen and (max-width: 600px) {
+          display: inline-block;
+          color: $secondary-color;
+          transition: stroke 0.3s ease;
+        }
+      }
+
+      &:hover path {
+        stroke: $primary-color;
+      }
+
+      &:hover span {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+// ======================
+
+.main-container {
+  flex: 1;
+}
+
+// ==============  HEADER STYLING ==============
+
+header {
+  width: 100%;
+  padding: 20px 50px 0px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+
+  .left {
+    @include verticalCenter(20px);
+
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    img {
+      width: 96px;
+      height: auto;
+    }
+
+    h2 {
+      color: $primary-color;
+      font: {
+        size: 24px;
+        weight: 300;
+      }
+
+      span {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .right {
+    @include verticalCenter(10px);
+    justify-content: space-between;
+
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
+
+    .menu-btn {
+      display: none;
+      padding: 10px;
+      img {
+        width: 32px;
+        height: auto;
+      }
+
+      @media screen and (max-width: 600px) {
+        display: inline-block;
+      }
+    }
+
+    .content {
+      @include verticalCenter(10px);
+    }
+
+    .theme-btn {
+      @include verticalCenter(0px);
+
+      input[type="checkbox"] {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100px;
+        height: 40px;
+        background: #414145;
+        box-shadow: 0px 0px 1px #8393a3;
+        border-radius: 20px;
+        position: relative;
+        cursor: pointer;
+
+        svg {
+          $active-color: #fff;
+          $deactive-color: #777e90;
+          z-index: 10;
+
+          path {
+            stroke: $active-color;
+          }
+        }
+
+        .switch-ball {
+          position: absolute;
+          top: 50%;
+          left: 5px;
+          transform: translateY(-50%);
+          width: 50px;
+          height: 30px;
+          background-color: #777e90;
+          border-radius: 15px;
+          transition: left 0.2s ease;
+          z-index: 5;
+        }
+      }
+
+      input:checked + label .switch-ball {
+        left: 45px;
+      }
+    }
+
+    .notify-btn {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: linear-gradient(
+            47.83deg,
+            rgba(69, 175, 238, 0.0001) 0%,
+            rgba(67, 177, 236, 0.615533) 3.59%,
+            rgba(65, 179, 233, 0.767526) 7.69%,
+            #3eb7e5 13.96%,
+            #23dbbd 71.42%,
+            rgba(30, 224, 183, 0.852977) 80.44%,
+            rgba(28, 228, 179, 0.768733) 85.61%,
+            rgba(27, 229, 177, 0.144475) 88.61%,
+            rgba(23, 234, 172, 0.0001) 95.53%
+          ),
+          #2dced6;
+      }
+
+      img {
+        width: 24px;
+        height: auto;
+      }
+    }
+  }
+}
+
+// ==============  MAIN BODY STYLING ==============
+
+main {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+
+  @media screen and (max-width: 850px) {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .left-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+
+    @media screen and (max-width: 850px) {
+      gap: 50px;
+    }
+  }
+
+  .card {
+    min-width: 360px;
+    padding: 20px;
+    background-color: $box-color;
+    border-radius: 30px;
+    position: relative;
+    box-shadow: -10px 48.5967px 140px rgba(126, 123, 160, 0.2);
+    backdrop-filter: blur(9.5px);
+  }
+
+  .card-1 {
+    @extend .card;
+    transform: translateY(-70px);
+    opacity: 0;
+    animation: downMove 0.7s ease 0.2s forwards;
+
+    @keyframes downMove {
+      from {
+        transform: translateY(-70px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+  }
+
+  .card-2 {
+    @extend .card;
+    transform: translateY(70px);
+    opacity: 0;
+    animation: upMove 0.7s ease 0.2s forwards;
+
+    @keyframes upMove {
+      from {
+        transform: translateY(70px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+  }
+
+  .card-3 {
+    @extend .card;
+    transform: translateX(70px);
+    opacity: 0;
+    animation: leftMove 0.7s ease 0.2s forwards;
+
+    @keyframes leftMove {
+      from {
+        transform: translateX(70px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    }
+  }
+
+  .activate-card {
+    @include verticalCenter(30px);
+    justify-content: space-between;
+    padding: 10px;
+
+    .left {
+      @include verticalCenter();
+      @media screen and (max-width: 950px) {
+        flex-direction: column-reverse;
+        align-items: start;
+      }
+
+      .toggle-btn {
+        @include verticalCenter(0px);
+
+        input[type="checkbox"] {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        label {
+          width: 75px;
+          height: 35px;
+          background: #3e434d;
+          box-shadow: 0px 0px 1px #8393a3;
+          border-radius: 20px;
+          position: relative;
+          cursor: pointer;
+
+          .switch-ball {
+            position: absolute;
+            top: 50%;
+            right: 0px;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            background: linear-gradient(
+              16.42deg,
+              rgba(69, 175, 238, 0.0001) -14.24%,
+              rgba(67, 177, 236, 0.615533) -9.28%,
+              rgba(65, 179, 233, 0.767526) -3.61%,
+              #3eb7e5 30.91%,
+              #23dbbd 84.43%,
+              rgba(30, 224, 183, 0.852977) 96.89%,
+              rgba(28, 228, 179, 0.768733) 104.03%,
+              rgba(27, 229, 177, 0.144475) 108.17%,
+              rgba(23, 234, 172, 0.0001) 117.73%
+            );
+            transition: right 0.2s ease;
+          }
+        }
+
+        input:checked + label .switch-ball {
+          right: 40px;
+        }
+      }
+
+      h3 {
+        font: {
+          size: 18px;
+          weight: 400;
+        }
+        color: $primary-color;
+        white-space: nowrap;
+
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .right {
+      img {
+        width: 100%;
+        max-width: 150px;
+        min-width: 130px;
+        height: auto;
+      }
+    }
+  }
+
+  .opensea-card {
+    padding: 10px;
+
+    .content {
+      @include verticalCenter();
+      @media screen and (max-width: 950px) {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 200px;
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
+      }
+
+      .text {
+        width: 40%;
+        h3 {
+          color: $primary-color;
+          font: {
+            size: 20px;
+            weight: 600;
+          }
+        }
+
+        p {
+          max-width: 200px;
+          color: $secondary-color;
+        }
+      }
+    }
+
+    button {
+      width: 72px;
+      height: 72px;
+      margin-top: 50px;
+      background: linear-gradient(
+        47.83deg,
+        rgba(69, 175, 238, 0.0001) 0%,
+        rgba(67, 177, 236, 0.615533) 3.59%,
+        rgba(65, 179, 233, 0.767526) 7.69%,
+        #3eb7e5 13.96%,
+        #23dbbd 71.42%,
+        rgba(30, 224, 183, 0.852977) 80.44%,
+        rgba(28, 228, 179, 0.768733) 85.61%,
+        rgba(27, 229, 177, 0.144475) 88.61%,
+        rgba(23, 234, 172, 0.0001) 95.53%
+      );
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+
+      @media screen and (max-width: 950px) {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        margin: 0;
+        width: 42px;
+        height: 42px;
+        border: none;
+      }
+    }
+
+    .right-img {
+      width: 60%;
+      max-width: 270px;
+      min-width: 230px;
+      height: auto;
+      position: absolute;
+      bottom: 0;
+      right: -6%;
+      z-index: 10;
+
+      @media screen and (max-width: 850px) {
+        right: 0;
+      }
+    }
+  }
+
+  .portfolio-card {
+    h3 {
+      color: $primary-color;
+      font: {
+        size: 20px;
+        weight: 600;
+      }
+      margin-bottom: 20px;
+    }
+
+    .portfolio-list {
+      .portfolio-item {
+        @include verticalCenter(10px);
+        width: 100%;
+        justify-content: space-between;
+        margin: 20px 0px 50px 0px;
+        color: $primary-color;
+
+        .left {
+          align-self: flex-start;
+          .item-logo {
+            @include verticalCenter(5px);
+            font-size: 16px;
+            margin-bottom: 12px;
+          }
+
+          .percent {
+            color: #42b6e1;
+          }
+        }
+
+        .right {
+          flex-basis: 60%;
+          img {
+            width: 100%;
+            min-width: 200px;
+            max-width: 600px;
+            height: auto;
+          }
+        }
+      }
+
+      .portfolio-item:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

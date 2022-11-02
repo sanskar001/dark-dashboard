@@ -1,0 +1,25 @@
+// RESET STYLESHEET
+
+$primary-font: "Poppins", sans-serif;
+$bgColor: #141416;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $primary-font;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $bgColor;
+}
+
+button {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
