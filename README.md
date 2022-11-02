@@ -12,4 +12,4 @@ It consists of beautiful css animation with animated side menu bar.
 
 ## Mobile View
 
-![alt text](./mobile.png "desktop view")
+![alt text](./mobile1.png "mobile view")
